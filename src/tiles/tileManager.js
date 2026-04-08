@@ -1,13 +1,14 @@
 export default async function loadTile(file, countX, countY) {
-    const result = await fetch('./tiles/' + file);
+    const response = await fetch(`../tiles/${file}`);
 
-    let listTile = {
-        image: await createImageBitmap(await result.blob()),
-        listItem: []
+    const listTile = {
+        image: await createImageBitmap(await response.blob()),
+        listItem: [],
     };
 
-    let stepX = listTile.image.width / countX;
-    let stepY = listTile.image.height / countY;
+    const stepX = listTile.image.width / countX;
+    const stepY = listTile.image.height / countY;
+
     for (let y = 0; y < countY; y++) {
         for (let x = 0; x < countX; x++) {
             listTile.listItem.push(await createImageBitmap(listTile.image, stepX * x, stepY * y, stepX, stepY));

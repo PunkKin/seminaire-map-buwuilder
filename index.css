@@ -8,7 +8,7 @@ body {
 }
 
 .menu {
-    width: 30%;
+    width: 20%;
     display: flex;
     flex-direction: column;
     padding: 25px 15px;
@@ -24,14 +24,14 @@ body {
 }
 
 .canvas {
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: center;
 
 }
 
 canvas {
-    background-color: #F0F0F0;
+    background-color: #000000;
 }
 
 input {
@@ -54,6 +54,15 @@ button {
 
 .tuile button{
     background-color: transparent;
+    border: 2px solid transparent;
+    padding: 4px;
+    transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+
+.tuile button.selected {
+    background-color: rgba(21, 101, 192, 0.2);
+    border-color: #64b5f6;
+    transform: scale(1.03);
 }
 
 .tools button {
