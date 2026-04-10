@@ -52,6 +52,11 @@ button {
     cursor: pointer;
 }
 
+.tuile {
+    max-height: 50%;
+    overflow-y: auto;
+}
+
 .tuile button{
     background-color: transparent;
     border: 2px solid transparent;

@@ -10,7 +10,7 @@ const state = createAppState();
 window.mapBuilderState = state;
 
 async function initialize() {
-    state.baseField = await loadTile("tiles3.png", 5, 5);
+    state.baseField = await loadTile("Temp.png", 8, 6);
 
     loadTileButton(state.baseField, dom.tileContainer, (selectedTile) => {
         state.currentTile = selectedTile;
@@ -26,9 +26,9 @@ async function initialize() {
 }
 
 function bindCanvasEvents() {
-    dom.canvas.addEventListener("click", (event) => {
+    dom.canvas.addEventListener("mousedown", (event) => {
         const position = getCellFromEvent(event, state.currentSize);
-        applyTool(dom.context, state, position);
+        applyTool(dom.context, state, position, dom.canvas);
     });
 }
 
