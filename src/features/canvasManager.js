@@ -1,6 +1,8 @@
 import config from "../core/config.js";
 import { floodFillCells, setCell, syncMapJson } from "../state/mapData.js";
 
+let activeBind = null;
+
 function getCanvasDimensions(context) {
     return {
         width: context.canvas.width,
@@ -33,7 +35,7 @@ export function drawGrid(context, size) {
     const squareWidth = canvasSize.width / width;
     const squareHeight = canvasSize.height / height;
 
-    clearCanvas(context);
+    (context);
 
     context.strokeStyle = "#6080F0";
     context.beginPath();
@@ -106,7 +108,7 @@ export function eraseTile(context, size, x, y) {
     );
 }
 
-export function applyTool(context, state, position) {
+export function applyTool(context, state, position, canvas) {
     const { currentTool, currentTile, currentSize, baseField } = state;
 
     switch (currentTool) {
@@ -127,9 +129,24 @@ export function applyTool(context, state, position) {
             return;
         case "pen":
         default:
-            drawTile(context, baseField, currentSize, position.x, position.y, currentTile);
-            setCell(state.mapData, position.x, position.y, currentTile);
-            syncMapJson(state);
+            state.activePen = true;
+
+                activeBind = (event) => {
+                    if (state.activePen) {
+                        const position = getCellFromEvent(event, state.currentSize);
+                        drawTile(context, baseField, currentSize, position.x, position.y, currentTile);
+                        setCell(state.mapData, position.x, position.y, currentTile);
+                        syncMapJson(state);
+                    }
+                }
+                canvas.addEventListener("mousemove", activeBind);
+                document.addEventListener("mouseup", () => {
+                    state.activePen = false;
+                    canvas.removeEventListener("mousemove",)
+                })
+                
+            
+
     }
 }
 
