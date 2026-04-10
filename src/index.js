@@ -10,7 +10,7 @@ const state = createAppState();
 window.mapBuilderState = state;
 
 async function initialize() {
-    state.baseField = await loadTile("Temp.png", 8, 6);
+    state.baseField = await loadTile("Temp.png", 9, 16);
 
     loadTileButton(state.baseField, dom.tileContainer, (selectedTile) => {
         state.currentTile = selectedTile;
